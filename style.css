@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+:root {
+    --title: "Great Vibes", cursive;
+    --body: "Lora", serif;
+
+    --prim: #620725;
+    --bg: #FCECD0;
+    --sec: #8B2631;
+
+    --card-width: 225px;
+    --card-count: 6;
+    --theta: calc(360deg / var(--card-count));
+    --radius: 16dvw;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    user-select: none;
+}
+
+main {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    background: url('./assets/bg.png');
+    background-position: center;
+    background-size: cover;
+}
+
+main *[data-active='false'] {
+    display: none;
+}
+
+/* Letter */
+.envelope {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.envelope div {
+    background: url('./assets/press.svg');
+    width: 40dvw;
+    aspect-ratio: 1/0.75;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.envelope span {
+    font-family: var(--title);
+    color: var(--prim);
+    font-size: 4em;
+    font-weight: 700;
+}
+
+/* Intro */
+
+.intro {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1/1;
+    width: 40dvw;
+    border-radius: 8px;
+    background: url('./assets/group_bg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.intro>div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+}
+
+.intro>img {
+    aspect-ratio: 1/1;
+    width: 50%;
+}
+
+.intro h1 {
+    font-family: var(--title);
+    color: var(--prim);
+    font-size: 3.75em;
+    margin: 0.25em 0 0.50em;
+    font-weight: 600;
+}
+
+.intro p {
+    font-family: var(--body);
+    color: var(--prim);
+    font-size: 1.10em;
+    margin-top: 0.75em;
+}
+
+.heart {
+    position: absolute;
+    object-fit: cover;
+    width: 20%;
+    aspect-ratio: 1/1;
+    transition: 0.25s;
+    opacity: 0;
+    transform: translateY(15%);
+    animation: slideUpFade 0.8s ease-out forwards;
+}
+
+.intro>div .heart:nth-child(5) {
+    top: 2.5%;
+    left: 0;
+    rotate: -15deg;
+}
+
+.intro>div .heart:nth-child(6) {
+    top: 2.5%;
+    right: 0;
+    rotate: 15deg;
+}
+
+.intro>div .heart:nth-child(7) {
+    bottom: -5%;
+    right: 0;
+    rotate: 15deg;
+}
+
+.intro>div .heart:nth-child(8) {
+    bottom: -5%;
+    left: 0;
+    rotate: -15deg;
+}
+
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(15%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-15%);
+    }
+}
+
+.main_btn {
+    padding: 0.60dvw;
+    width: max-content;
+    background: url('./assets/main_bg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    color: var(--bg);
+    font-family: var(--body);
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: ease 0.5s;
+    z-index: 999;
+}
+
+.main_btn:hover {
+    background: url('./assets/sec_bg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Content */
+
+.content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50dvw;
+    height: 90dvh;
+    justify-content: center;
+    align-items: center;
+    background: url('./assets/group_bg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.content .heart:nth-child(3) {
+    top: 8%;
+    left: 4%;
+    rotate: -15deg;
+}
+
+.content .heart:nth-child(4) {
+    top: 12%;
+    right: 4%;
+    rotate: 15deg;
+}
+
+.content .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .title h2{
+    font-family: var(--body);
+    color: var(--prim);
+    font-size: 3.75em;
+    font-weight: 600;
+}
+
+.content .title span{
+    font-family: var(--body);
+    color: var(--prim);
+    font-size: 1.5em;
+    margin: 0.25em 0 2em;
+    font-weight: 400;
+}
+
+.carousel-scene {
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.carousel {
+    width: var(--card-width);
+    height: 250px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.carousel img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.card-wrapper {
+    position: absolute;
+    width: var(--card-width);
+    height: 250px;
+    left: 10px;
+    top: 10px;
+}
+
+.card-wrapper:nth-child(1) {
+    transform: rotateY(0deg) translateZ(var(--radius));
+}
+
+.card-wrapper:nth-child(2) {
+    transform: rotateY(60deg) translateZ(var(--radius));
+}
+
+.card-wrapper:nth-child(3) {
+    transform: rotateY(120deg) translateZ(var(--radius));
+}
+
+.card-wrapper:nth-child(4) {
+    transform: rotateY(180deg) translateZ(var(--radius));
+}
+
+.card-wrapper:nth-child(5) {
+    transform: rotateY(240deg) translateZ(var(--radius));
+}
+
+.card-wrapper:nth-child(6) {
+    transform: rotateY(300deg) translateZ(var(--radius));
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    background: url('./assets/group_bg.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: grid;
+    place-items: center;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    backface-visibility: hidden;
+    user-select: none;
+}
+
+.card-face img {
+    width: 100%;
+    height: 90%;
+    object-fit: contain;
+}
+
+.card-back {
+    display: grid;
+    place-items: center;
+    transform: rotateY(180deg);
+    padding: 20px;
+    backface-visibility: hidden;
+    user-select: none;
+    
+    font-family: var(--body);
+    color: var(--prim);
+    font-size: 1em;
+
+    font-weight: 400;
+}
+
+
+/* Mouse Affect */
+.glow-point {
+    position: absolute;
+    box-shadow: 0rem 0rem 0.5rem 0.5rem var(--sec);
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    z-index: 10;
+    font-size: 1rem;
+    animation-duration: 1500ms;
+    animation-fill-mode: forwards;
+    pointer-events: none;
+}
+
+.star svg {
+    width: 150%;
+    height: 150%;
+}
+
+@keyframes fall-1 {
+    0% {
+        transform: translate(0px, 0px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(0.25);
+        opacity: 0;
+    }
+
+    5% {
+        transform: translate(10px, -10px) rotateX(45deg) rotateY(30deg) rotateZ(0deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(25px, 200px) rotateX(180deg) rotateY(270deg) rotateZ(90deg) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fall-2 {
+    0% {
+        transform: translate(0px, 0px) rotateX(-20deg) rotateY(10deg) scale(0.25);
+        opacity: 0;
+    }
+
+    10% {
+        transform: translate(-10px, -5px) rotateX(-20deg) rotateY(10deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-10px, 160px) rotateX(-90deg) rotateY(45deg) scale(0.25);
+        opacity: 0;
+    }
+}
+
+@keyframes fall-3 {
+    0% {
+        transform: translate(0px, 0px) rotateX(0deg) rotateY(45deg) scale(0.5);
+        opacity: 0;
+    }
+
+    15% {
+        transform: translate(7px, 5px) rotateX(0deg) rotateY(45deg) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(20px, 120px) rotateX(-180deg) rotateY(-90deg) scale(0.5);
+        opacity: 0;
+    }
+}
